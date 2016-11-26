@@ -1112,7 +1112,7 @@ def nuevo_hu(request,codigo):
                     dato = Historia(usuario=usuario.username,nombre='Crear',fecha=fecha,descripcion='Se Crea el HU',hu=pro)
                     dato.save()
                     mensaje = "Se creo el hu: %s. \nFue creado por: %s" %(nombre, usuario.username)
-                    mail = EmailMessage('Creacion de un HU',mensaje,'smtp.gmail.com',['gustavootazu81@gmail.com','rodrigoamarillasanabria@gmail.com','Rfsgold@gmail.com'])
+                    mail = EmailMessage('Creacion de un HU',mensaje,'smtp.gmail.com',['rfsgold@gmail.com'])
                     mail.send()
 
                     return HttpResponseRedirect(reverse('usuario:adminhu',args=(proyecto.id,)))
@@ -1157,7 +1157,7 @@ def eliminar_hu(request, id_hu, codigo):
             hu.delete()
             usuario=request.user
             mensaje = "Se elimino el hu: %s. \nFue eliminado por: %s" %(hu.nombre, usuario.username)
-            mail = EmailMessage('Eliminacion  de un HU',mensaje,'smtp.gmail.com',['gustavootazu81@gmail.com','rodrigoamarillasanabria@gmail.com','Rfsgold@gmail.com'])
+            mail = EmailMessage('Eliminacion  de un HU',mensaje,'smtp.gmail.com',['rfsgold@gmail.com'])
             mail.send()
         return HttpResponseRedirect(reverse('usuario:adminhu',args=(proyecto.id,)))
     else:
@@ -1197,7 +1197,7 @@ def modificar_hu_view( request, id_hu, codigo):
                 dato = Historia(usuario=usuario.username,nombre='Modificar',fecha=fecha,descripcion='Se Modifica al HU',hu=hu)
                 dato.save()
                 mensaje = "Se modifico el hu: %s. \nFue modificado por: %s" %(hu.nombre, usuario.username)
-                mail = EmailMessage('Modificacion de HU',mensaje,'smtp.gmail.com',['gustavootazu81@gmail.com','rodrigoamarillasanabria@gmail.com','Rfsgold@gmail.com'])
+                mail = EmailMessage('Modificacion de HU',mensaje,'smtp.gmail.com',['rfsgold@gmail.com'])
                 mail.send()
                 return HttpResponseRedirect(reverse('usuario:adminhu',args=(proyecto.id,)))
         else:
@@ -2072,7 +2072,7 @@ def avanzar(request,id_hu,codigo):
         if hu.estadoflujo == 'DON'and actividad.orden == flujo.cantidad:
             destino = User.objects.get(pk = proyecto.lider_id)
             mensaje = "El hu: %s ya esta listo para ser finalizado" %(hu.nombre)
-            mail = EmailMessage('Hu listo Para su Finalizacion',mensaje,'smtp.gmail.com',[destino.email])
+            mail = EmailMessage('Hu listo Para su Finalizacion',mensaje,'smtp.gmail.com',['rfsgold@gmail.com'])
             mail.send()
         return HttpResponseRedirect(reverse('usuario:flujo_proyecto',args=(proyecto.id,)))
     else:
